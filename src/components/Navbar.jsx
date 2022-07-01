@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsSearch } from "react-icons/bs";
 import { FcLike } from "react-icons/fc";
@@ -7,13 +7,20 @@ import { AiOutlineShoppingCart, AiFillPhone, AiOutlineClose } from "react-icons/
 import { GoLocation } from "react-icons/go";
 
 const Navbar = () => {
+  const [nav, SetNav] = useState(false)
+
+
+  const handleNav = () => {
+    SetNav(!nav)
+  }
+  
   return (
     <div>
     {/* Navbar */}
-    <div className="hidden fixed w-full h-[4.5rem] flex justify-between items-center py-4 md:px-10 lg:px-14 px-6 text-sky-600">
+    <div className={nav ? "fixed w-full h-[4.5rem] flex justify-between items-center py-4 md:px-10 lg:px-14 px-6 text-sky-600" : 'hidden'}>
       {/* Humberger */}
-      <div className=" flex items-center ">
-        <GiHamburgerMenu size={33} className="pr-2   lg:hidden" />
+      <div onClick={handleNav} className=" flex items-center ">
+        <GiHamburgerMenu size={33} className="pr-2   md:hidden" />
 
         {/* Logo */}
         <h1 className="text-2xl md:text-3xl text-sky-600">Room</h1>
@@ -21,7 +28,7 @@ const Navbar = () => {
 
       {/* Search */}
       <div className=" hidden md:flex justify-between items-center">
-        <button className="flex px-3 py-1.5 lg:px-4 lg:py-2.5 mr-10 bg-sky-600 text-white justify-between items-center hover:text-sky-600 hover:bg-white duration-300 rounded-xl">
+        <button  onClick={handleNav} className="flex px-3 py-1.5 lg:px-4 lg:py-2.5 mr-10 bg-sky-600 text-white justify-between items-center hover:text-sky-600 hover:bg-white duration-300 rounded-xl">
           <GiHamburgerMenu className="pr-2 w-[1.5rem]" />
           Categories
         </button>
@@ -45,8 +52,8 @@ const Navbar = () => {
       </div>
     </div>
     {/* Menu List */}
-    <div  className="flex  flex-col  h-screen">
-      <div className="h-[13%] flex items-center self-end px-5 mb-2 text-red-900 font-bold hover:bg-red-900 hover:text-white duration-300">
+    <div  className={!nav ? "flex  flex-col  h-screen ease-in-out  duration-500 " : 'fixed left-[100%]'}>
+      <div onClick={handleNav} className="h-[13%] flex items-center self-end px-5 mb-2 text-red-900 font-bold hover:bg-red-900 hover:text-white duration-300">
         <AiOutlineClose />
         </div>
     
